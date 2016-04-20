@@ -2,6 +2,12 @@
 # "CPU Panel (8-core)" theme for Conky by Tony George (teejee2008@gmail.com)
 #
 # Webpage: http://teejeetech.blogspot.in/
+#
+#EDITED
+# Added spotify integration, pacman and AUR updates checker, clock, transparency and love <3
+#
+# Original Clock http://www.deviantart.com/art/Antergos-Budgie-601959471
+# Spotify Integration https://gist.github.com/red-noise/9789642
 # **********************************************************************
 
 
@@ -58,7 +64,7 @@ color2 FFA300
 color3 grey
 color4 2F2F2F
 
-lua_load ~/scripts/draw_bg.lua
+lua_load ~/.conky/Juan-conky/scripts/draw_bg.lua
 lua_draw_hook_pre draw_bg
 
 TEXT
