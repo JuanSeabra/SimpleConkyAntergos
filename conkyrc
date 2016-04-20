@@ -39,8 +39,8 @@ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 
 
 
-minimum_size 300 0
-maximum_width 300
+minimum_size 250 0
+maximum_width 250
 stippled_borders 0
 update_interval 2.0
 uppercase no
@@ -66,14 +66,14 @@ TEXT
 # - TIME - #
 ############
 
-${color1}${font Helvetica Neue:pixelsize=50}${time %H:%M}${font}
-${voffset 0}${color1}${font Lato:pixelsize=20}${time %d} ${color1}${font Lato:thin:pixelsize=15}${time  %B} ${time %Y} ${font Distortion Dos Digital:pixelsize=20}${time %a}${font}
+${offset 65}${color1}${font Helvetica Neue:pixelsize=50}${time %H:%M}${font}
+${offset 65}${color1}${font Lato:pixelsize=20}${time %d} ${color1}${font Lato:thin:pixelsize=15}${time  %B} ${time %Y} ${font Distortion Dos Digital:pixelsize=20}${time %a}${font}
 #
 ##############
 # - SYSTEM - #
 ##############
 
-${image ~/.conky/Antergos.png -p 0,95 -s 30x30} ${offset 30}${color0}Antergos 
+${image ~/.conky/Juan-conky/Antergos.png -p 0,95 -s 30x30} ${offset 30}${color0}Antergos 
 
 ${color0}Kernel: ${color0}${kernel}
 
@@ -103,10 +103,10 @@ ${top_mem name 5} $alignr ${top_mem mem_res 5}
 ###############
 #
 ${if_running spotify}${voffset -2}${font Liberation Sans:style=Bold:size=8}
-${exec ~/.conky/spotify/spotify_album_cover}
-${image ~/.conky/spotify/last_album_pic.png -p 0,455 -s 60x60}
-${goto 73}Title: ${exec ~/.conky/spotify/spotify_info_title}${color}
-${goto 73}Artist: ${exec ~/.conky/spotify/spotify_info_artist}${color}
-${goto 73}Album: ${exec ~/.conky/spotify/spotify_info_album}${color}
+${exec ~/.conky/Juan-conky/spotify/spotify_album_cover}
+${image ~/.conky/Juan-conky/spotify/last_album_pic.png -p 0,455 -s 60x60}
+${goto 73}Title: ${exec ~/.conky/Juan-conky/spotify/spotify_info_title}${color}
+${goto 73}Artist: ${exec ~/.conky/Juan-conky/spotify/spotify_info_artist}${color}
+${goto 73}Album: ${exec ~/.conky/Juan-conky/spotify/spotify_info_album}${color}
 ${endif}
 
