@@ -26,6 +26,8 @@ draw_graph_borders yes
 draw_outline no
 draw_shades no
 
+update_interval 1
+
 gap_x 10
 gap_y 15
 net_avg_samples 2
@@ -51,6 +53,7 @@ stippled_borders 0
 update_interval 2.0
 uppercase no
 use_spacer none
+imlib_cache_size 0  
 
 show_graph_scale no
 show_graph_range no
@@ -83,7 +86,7 @@ ${image ~/.conky/Juan-conky/Antergos.png -p 0,95 -s 30x30} ${offset 30}${color0}
 
 ${color0}Kernel: ${color0}${kernel}
 
-${color0}Updates: ${execi 600 pacman -Qu | wc -l} ${offset 30}AUR: ${execi 600 cower -u | wc -l}
+${color0}Updates: ${exec pacman -Qu | wc -l} ${offset 30}AUR: ${execi 600 cower -u | wc -l}
 
 ${color0}HD ${color0}${alignr}${fs_used}/${fs_size}
 ${fs_bar}
@@ -107,12 +110,10 @@ ${top_mem name 5} $alignr ${top_mem mem_res 5}
 ###############
 # - SPOTIFY - #
 ###############
-#
 ${if_running spotify}${voffset -2}${font Liberation Sans:style=Bold:size=8}
-${exec ~/.conky/Juan-conky/spotify/spotify_album_cover}
-${image ~/.conky/Juan-conky/spotify/last_album_pic.png -p 0,455 -s 60x60}
+${image ~/.conky/Juan-conky/spotify/last_album_pic.png -p 0,473
+ -s 60x60}
 ${goto 73}Title: ${exec ~/.conky/Juan-conky/spotify/spotify_info_title}${color}
 ${goto 73}Artist: ${exec ~/.conky/Juan-conky/spotify/spotify_info_artist}${color}
 ${goto 73}Album: ${exec ~/.conky/Juan-conky/spotify/spotify_info_album}${color}
 ${endif}
-
