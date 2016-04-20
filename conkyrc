@@ -1,0 +1,112 @@
+# **********************************************************************
+# "CPU Panel (8-core)" theme for Conky by Tony George (teejee2008@gmail.com)
+#
+# Webpage: http://teejeetech.blogspot.in/
+# **********************************************************************
+
+
+background yes
+double_buffer yes
+
+alignment bottom_right
+
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+
+gap_x 10
+gap_y 15
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+
+
+own_window yes
+own_window_type desktop
+own_window_transparent yes
+own_window_colour 000000
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+
+
+minimum_size 300 0
+maximum_width 300
+stippled_borders 0
+update_interval 2.0
+uppercase no
+use_spacer none
+
+show_graph_scale no
+show_graph_range no
+
+use_xft yes
+xftalpha 0.1
+xftfont Droid Sans:size=10
+color0 white
+color1 EAEAEA
+color2 FFA300
+color3 grey
+color4 2F2F2F
+
+lua_load ~/scripts/draw_bg.lua
+lua_draw_hook_pre draw_bg
+
+TEXT
+############
+# - TIME - #
+############
+
+${color1}${font Helvetica Neue:pixelsize=50}${time %H:%M}${font}
+${voffset 0}${color1}${font Lato:pixelsize=20}${time %d} ${color1}${font Lato:thin:pixelsize=15}${time  %B} ${time %Y} ${font Distortion Dos Digital:pixelsize=20}${time %a}${font}
+#
+##############
+# - SYSTEM - #
+##############
+
+${image ~/.conky/Antergos.png -p 0,95 -s 30x30} ${offset 30}${color0}Antergos 
+
+${color0}Kernel: ${color0}${kernel}
+
+${color0}Updates: ${execi 600 pacman -Qu | wc -l} ${offset 30}AUR: ${execi 600 cower -u | wc -l}
+
+${color0}HD ${color0}${alignr}${fs_used}/${fs_size}
+${fs_bar}
+
+${color0}CPU ${color0}${alignr}${cpu cpu0}%
+${cpubar}
+${top name 1} $alignr ${top cpu 1}%
+${top name 2} $alignr ${top cpu 2}%
+${top name 3} $alignr ${top cpu 3}%
+${top name 4} $alignr ${top cpu 4}%
+${top name 5} $alignr ${top cpu 5}%
+
+${color0}RAM ${color0}${alignr}${mem}
+${membar}
+${top_mem name 1} $alignr ${top_mem mem_res 1}
+${top_mem name 2} $alignr ${top_mem mem_res 2}
+${top_mem name 3} $alignr ${top_mem mem_res 3}
+${top_mem name 4} $alignr ${top_mem mem_res 4}
+${top_mem name 5} $alignr ${top_mem mem_res 5}
+#
+###############
+# - SPOTIFY - #
+###############
+#
+${if_running spotify}${voffset -2}${font Liberation Sans:style=Bold:size=8}
+${exec ~/.conky/spotify/spotify_album_cover}
+${image ~/.conky/spotify/last_album_pic.png -p 0,455 -s 60x60}
+${goto 73}Title: ${exec ~/.conky/spotify/spotify_info_title}${color}
+${goto 73}Artist: ${exec ~/.conky/spotify/spotify_info_artist}${color}
+${goto 73}Album: ${exec ~/.conky/spotify/spotify_info_album}${color}
+${endif}
+
