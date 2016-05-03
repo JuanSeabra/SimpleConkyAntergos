@@ -14,7 +14,7 @@
 background yes
 double_buffer yes
 
-alignment bottom_right
+alignment bottom_left
 
 border_width 1
 cpu_avg_samples 2
@@ -26,10 +26,10 @@ draw_graph_borders yes
 draw_outline no
 draw_shades no
 
-update_interval 1
+update_interval 0.5 
 
 gap_x 10
-gap_y 15
+gap_y 90
 net_avg_samples 2
 no_buffers yes
 out_to_console no
@@ -40,15 +40,14 @@ extra_newline no
 own_window yes
 own_window_type desktop
 own_window_transparent yes
-own_window_colour 000000
 own_window_argb_visual yes
 own_window_argb_value 0
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 
 
 
-minimum_size 250 0
-maximum_width 250
+minimum_size 0 0
+#maximum_width 160
 stippled_borders 0
 update_interval 2.0
 uppercase no
@@ -60,60 +59,65 @@ show_graph_range no
 
 use_xft yes
 xftalpha 0.1
-xftfont Droid Sans:size=10
+xftfont Raleway:size=10
+#xftfont Droid Sans:size=9
+#xftfont Lato:size=12
 color0 white
 color1 EAEAEA
 color2 FFA300
 color3 grey
 color4 2F2F2F
 
-lua_load ~/.conky/Juan-conky/scripts/draw_bg.lua
-lua_draw_hook_pre draw_bg
+#lua_load ~/.conky/Juan-conky/scripts/draw_bg.lua
+#lua_draw_hook_pre draw_bg
 
+own_window_colour 000000
+
+draw_graph_borders no
 TEXT
-############
-# - TIME - #
-############
+##############
+# - NETWORK - #
+##############
 
-${offset 65}${color1}${font Helvetica Neue:pixelsize=50}${time %H:%M}${font}
-${offset 65}${color1}${font Lato:pixelsize=20}${time %d} ${color1}${font Lato:thin:pixelsize=15}${time  %B} ${time %Y} ${font Distortion Dos Digital:pixelsize=20}${time %a}${font}
-#
+$alignr${font Raleway:pixelsize=20}Network${font}
+$hr
+
+Wireless Status (${addr wlp2s0}):
+Down: ${downspeed wlp2s0} ${alignr}Up: ${upspeed wlp2s0}
+
+Ethernet Status (${addr enp3s0f1}):
+Down: ${downspeed enp3s0f1} ${alignr}Up: ${upspeed enp3s0f1}
 ##############
 # - SYSTEM - #
 ##############
+#
 
-${image ~/.conky/Juan-conky/Antergos.png -p 0,95 -s 30x30} ${offset 30}${color0}Antergos 
+$alignr${font Raleway:pixelsize=20}System${font}
+$hr
 
-${color0}Kernel: ${color0}${kernel}
+Updates: ${execi 3600 checkupdates | wc -l} $alignr AUR: ${execi 600 cower -u | wc -l}
 
-${color0}Updates: ${exec pacman -Qu | wc -l} ${offset 30}AUR: ${execi 600 cower -u | wc -l}
+$sysname $kernel on $machine
 
-${color0}HD ${color0}${alignr}${fs_used}/${fs_size}
-${fs_bar}
+HD ${alignr}${fs_used}/${fs_size}
+${fs_bar 4}
 
-${color0}CPU ${color0}${alignr}${cpu cpu0}%
-${cpubar}
+CPU ${alignr}${cpu cpu0}%
+${cpubar 4}
+${cpugraph 15}
+
 ${top name 1} $alignr ${top cpu 1}%
 ${top name 2} $alignr ${top cpu 2}%
 ${top name 3} $alignr ${top cpu 3}%
 ${top name 4} $alignr ${top cpu 4}%
 ${top name 5} $alignr ${top cpu 5}%
 
-${color0}RAM ${color0}${alignr}${mem}
-${membar}
+RAM ${alignr}${mem}/${memmax}
+${membar 4}
+${memgraph 15}
+
 ${top_mem name 1} $alignr ${top_mem mem_res 1}
 ${top_mem name 2} $alignr ${top_mem mem_res 2}
 ${top_mem name 3} $alignr ${top_mem mem_res 3}
 ${top_mem name 4} $alignr ${top_mem mem_res 4}
 ${top_mem name 5} $alignr ${top_mem mem_res 5}
-#
-###############
-# - SPOTIFY - #
-###############
-${if_running spotify}${voffset -2}${font Liberation Sans:style=Bold:size=8}
-${image ~/.conky/Juan-conky/spotify/last_album_pic.png -p 0,473
- -s 60x60}
-${goto 73}Title: ${exec ~/.conky/Juan-conky/spotify/spotify_info_title}${color}
-${goto 73}Artist: ${exec ~/.conky/Juan-conky/spotify/spotify_info_artist}${color}
-${goto 73}Album: ${exec ~/.conky/Juan-conky/spotify/spotify_info_album}${color}
-${endif}
